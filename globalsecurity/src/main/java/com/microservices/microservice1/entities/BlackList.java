@@ -24,6 +24,6 @@ public class BlackList {
 	private Date exp_time;
 	
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	private User targetUser;
 }

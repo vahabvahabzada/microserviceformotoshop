@@ -26,13 +26,14 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 	
+
 	private String username;
 	private String password;
 	
-	@OneToMany(mappedBy = "targetUser")
-	private List<BlackList> blackList;
+	@OneToMany(mappedBy = "targetUser",cascade = CascadeType.ALL)
+	private List<BlackList> blackList=new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles = new ArrayList<>();
 }

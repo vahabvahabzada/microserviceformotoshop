@@ -1,4 +1,4 @@
-package com.microservices.microservice1.controllers;
+package com.microservices.microservice1.communication;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.microservices.microservice1.services.JWTGenerator;
+import com.microservices.microservice1.jwt.JWTGenerator;
 
 @RestController
 public class JWTController {

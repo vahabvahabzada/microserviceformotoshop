@@ -1,4 +1,4 @@
-package com.microservices.microservice1.services;
+package com.microservices.microservice1.communication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +10,9 @@ public class BlackListCommunicationService {
     @Autowired
     private BlackListRepo repo;
     public String findByToken(String token){
-        return repo.findByToken(token).getToken();
+        if(repo.findByToken(token)!=null){
+            return repo.findByToken(token).getToken();
+        }
+        return null;
     }
 }

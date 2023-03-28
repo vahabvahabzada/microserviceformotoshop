@@ -1,4 +1,4 @@
-package com.microservices.microservice1.configurations;
+package com.microservices.microservice1.jwt;
 
 import java.io.IOException;
 
@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.microservices.microservice1.dtos.BlackListDto;
+import com.microservices.microservice1.security.CustomUserDetails;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,8 +28,8 @@ public class JWTFilter extends OncePerRequestFilter{
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String token=getJWTFromRequest(request);
-        BlackListDto deprecatedToken=restTemplate.postForObject("http://localhost:8080/blacklist", token,BlackListDto.class);
-        Boolean tokenValidation=restTemplate.postForObject("http://localhost:8080/blacklist",token,Boolean.class);
+        String deprecatedToken=restTemplate.postForObject("http://localhost:8080/blacklist", token,String.class);
+        Boolean tokenValidation=restTemplate.postForObject("http://localhost:8080/validatetoken",token,Boolean.class);
         if(token!=null && deprecatedToken==null && tokenValidation){
             String username=restTemplate.postForObject("http://localhost:8080/getusername",token,String.class);
             UserDetails istifadeciDetallari=userDetails.loadUserByUsername(username);

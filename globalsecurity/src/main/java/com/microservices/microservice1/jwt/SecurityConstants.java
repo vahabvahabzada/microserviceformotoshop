@@ -1,4 +1,4 @@
-package com.microservices.microservice1;
+package com.microservices.microservice1.jwt;
 
 public class SecurityConstants {
 	public static final String JWT_SECRET="vlasecret";

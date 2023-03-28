@@ -1,4 +1,4 @@
-package com.microservices.microservice1.configurations;
+package com.microservices.microservice1.security;
 
 import java.util.ArrayList;
 import java.util.List;

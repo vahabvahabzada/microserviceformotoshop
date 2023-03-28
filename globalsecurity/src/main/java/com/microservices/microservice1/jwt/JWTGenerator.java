@@ -1,12 +1,10 @@
-package com.microservices.microservice1.services;
+package com.microservices.microservice1.jwt;
 
 import java.util.Date;
 
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
-import com.microservices.microservice1.SecurityConstants;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
