@@ -23,7 +23,7 @@ public class CarService {
         return carRepo.listModels(brandName);
     }
 
-    public List<CarDto> getCars(CarDto targetCar/*,int minPrice,int maxPrice*/){
+    public List<CarDto> getCars(CarDto targetCar,Integer priceMin,Integer priceMax,Integer yearMin,Integer yearMax){
         Car target=new Car();
         target.setBanStyle(targetCar.getBanStyle());
         target.setBarter(targetCar.getBarter());
@@ -38,7 +38,7 @@ public class CarService {
         
         //List<Car> results=carRepo.findByBrandAndModelAndColor(target.getBrand(), target.getModel(), target.getColor());
 
-        List<Car> results=carRepo.getCars(target);
+        List<Car> results=carRepo.getCars(target,priceMin,priceMax,yearMin,yearMax);
         List<CarDto> dtoResults=new ArrayList<>();
         for(Car result:results){
         targetCar.setBanStyle(result.getBanStyle());

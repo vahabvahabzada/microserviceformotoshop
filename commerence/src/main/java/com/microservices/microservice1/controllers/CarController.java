@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microservices.microservice1.dtos.CarDto;
+import com.microservices.microservice1.dtos.GetCars;
 import com.microservices.microservice1.services.CarService;
 
 
@@ -27,7 +28,7 @@ public class CarController {
     }
 
     @GetMapping("/getcars")
-    public List<CarDto> getCars(@RequestBody CarDto etalonCar/*,@RequestBody int minPrice,@RequestBody int maxPrice*/){//ger bir secime clik edednde,uygun olaraq filterleyib neticeleri cixarir
-        return carService.getCars(etalonCar/*,minPrice,maxPrice*/);
+    public List<CarDto> getCars(@RequestBody GetCars data){//ger bir secime click edednde,uygun olaraq filterleyib neticeleri cixarir ve elecede qiymet ve il araligini teyin edende
+        return carService.getCars(data.getCarDto(),data.getPriceMin(),data.getPriceMax(),data.getYearMin(),data.getYearMax());
     }
 }

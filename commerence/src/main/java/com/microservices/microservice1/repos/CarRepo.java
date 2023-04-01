@@ -10,27 +10,21 @@ import com.microservices.microservice1.entities.Car;
 
 public interface CarRepo extends JpaRepository<Car,Long>{
     
-    @Query(value = "select brand from cars",nativeQuery=true)
+    @Query("select item.brand from Car item")
     public List<String> listBrands();
 
-    @Query(value = "select model from cars where brand=?",nativeQuery = true)
+    @Query("select item.model from Car item where item.brand=?1")
     public List<String> listModels(String carRepo);
-    
-    /*@Query(value="(select * from cars where "+
-    "brand=:#{#car.brand} or not exists(select * from cars where brand=:#{#car.brand} or :#{#car.brand} <>''))" + " intersect "+
-    "(select * from cars where model=:#{#car.model} or not exists(select * from cars where model=:#{#car.model} or :#{#car.model} <>''))"+" intersect "+
-    "(select * from cars where color=:#{#car.color} or not exists(select * from cars where color=:#{#car.color} or :#{#car.color} <>''))"+" intersect "+
-    "(select * from cars where barter=:#{#car.barter} or not exists(select * from cars where barter=:#{#car.barter} or :#{#car.barter} <>''))",nativeQuery=true)*/
     
     @Query("(select item from Car item where item.brand=:#{#car.brand} or not exists(select item from Car item where :#{#car.brand} <>''))" + " intersect "+
     "(select item from Car item where item.model=:#{#car.model} or not exists(select item from Car item where :#{#car.model} <>''))"+" intersect "+
     "(select item from Car item where item.color=:#{#car.color} or not exists(select item from Car item where :#{#car.color} <>''))"+" intersect "+
     "(select item from Car item where item.banStyle=:#{#car.banStyle} or not exists(select item from Car item where :#{#car.banStyle} <>''))"+" intersect "+
-    "(select item from Car item where item.year=:#{#car.year} or not exists(select item from Car item where :#{#car.year} is not null))"+" intersect "+
+    "(select item from Car item where item.year between :yearmin and :yearmax or not exists(select item from Car item where :yearmin is not null or :yearmax is not null))"+" intersect "+
     "(select item from Car item where item.credit=:#{#car.credit} or not exists(select item from Car item where :#{#car.credit} is not null))"+" intersect "+
     "(select item from Car item where item.currency=:#{#car.currency} or not exists(select item from Car item where :#{#car.currency} <>''))"+" intersect "+
     "(select item from Car item where item.kilometers=:#{#car.kilometers} or not exists(select item from Car item where :#{#car.kilometers} is not null))"+" intersect "+
-    "(select item from Car item where item.price=:#{#car.price} or not exists(select item from Car item where :#{#car.price} is not null))"+" intersect "+
+    "(select item from Car item where item.price between :pricemin and :pricemax or not exists(select item from Car item where :pricemin is not null or :pricemax is not null))"+" intersect "+
     "(select item from Car item where item.barter=:#{#car.barter} or not exists(select item from Car item where :#{#car.barter} is not null))")
-    public List<Car> getCars(@Param("car") Car target);
+    public List<Car> getCars(@Param("car") Car target,@Param("pricemin") Integer priceMin,@Param("pricemax") Integer priceMax,@Param("yearmin") Integer yearMin,@Param("yearmax") Integer yearMax);
 }

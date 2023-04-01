@@ -1,6 +1,7 @@
 com\microservices\microservice1\entities\UserName.class
 com\microservices\microservice1\entities\Car.class
 com\microservices\microservice1\controllers\CarController.class
+com\microservices\microservice1\dtos\GetCars.class
 com\microservices\microservice1\repos\CarRepo.class
 com\microservices\microservice1\services\CarService.class
 com\microservices\microservice1\Commerence.class
