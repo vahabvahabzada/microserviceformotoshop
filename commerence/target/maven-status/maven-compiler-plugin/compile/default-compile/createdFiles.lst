@@ -1,7 +1,0 @@
-com\microservices\microservice1\entities\UserName.class
-com\microservices\microservice1\entities\Car.class
-com\microservices\microservice1\controllers\CarController.class
-com\microservices\microservice1\repos\CarRepo.class
-com\microservices\microservice1\services\CarService.class
-com\microservices\microservice1\Commerence.class
-com\microservices\microservice1\dtos\CarDto.class
