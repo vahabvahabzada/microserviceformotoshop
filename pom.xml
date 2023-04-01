@@ -56,5 +56,6 @@
   <modules>
   	<module>globalsecurity</module>
 	<module>welcome</module>
+	<module>commerence</module>
   </modules>
 </project>
