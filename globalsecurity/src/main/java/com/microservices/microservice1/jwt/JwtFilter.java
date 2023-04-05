@@ -17,35 +17,41 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class JwtFilter extends OncePerRequestFilter{
+public class JwtFilter extends OncePerRequestFilter {
     @Autowired
-    JWTGenerator jwtGenerator;
+    private JWTGenerator jwtGenerator;
 
     @Autowired
-    CustomUserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    BlackListRepo blackListRepo;
+    private BlackListRepo blackListRepo;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-                String token=getJwtFromRequest(request);
-                System.out.println("Yoxlama : "+blackListRepo.findByToken(token));//yoxlama
+        String token = getJwtFromRequest(request);
+        System.out.println("Yoxlama : " + blackListRepo.findByToken(token));// yoxlama
+        if (token != null) {
+            if (jwtGenerator.validateToken(token) && blackListRepo.findByToken(token) == null) {
+                String username = jwtGenerator.getUsernameFromToken(token);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                if(token!=null && jwtGenerator.validateToken(token) && blackListRepo.findByToken(token)==null){
-                    String username=jwtGenerator.getUsernameFromToken(token);
-                    UserDetails userDetails=userDetailsService.loadUserByUsername(username);
-                    UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(userDetails, null,userDetails.getAuthorities());
-                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                }
-                filterChain.doFilter(request, response);
+                // UsernamePasswordAuthenticationToken authenticationToken=new
+                // UsernamePasswordAuthenticationToken(username,
+                // userDetails.getPassword(),userDetails.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }
+        }
+        filterChain.doFilter(request, response);
     }
-    
-    private String getJwtFromRequest(HttpServletRequest request){
-        String token=request.getHeader("Authorization");
-        if(token!=null && token.startsWith("Bearer ")){
+
+    private String getJwtFromRequest(HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        if (token != null && token.startsWith("Bearer ")) {
             return token.substring(7);// "Bearer "
         }
         return null;

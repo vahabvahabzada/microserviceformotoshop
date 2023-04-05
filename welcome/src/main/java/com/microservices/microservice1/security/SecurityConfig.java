@@ -18,7 +18,7 @@ import com.microservices.microservice1.jwt.JWTFilter;
 public class SecurityConfig {
 
     @Autowired
-    JWTAuthEntryPoint jwtAuthEntryPoint;
+    private JWTAuthEntryPoint jwtAuthEntryPoint;
 
     @Bean
     public RestTemplate restTemplate(){
@@ -26,7 +26,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
         .cors()
         .and()
