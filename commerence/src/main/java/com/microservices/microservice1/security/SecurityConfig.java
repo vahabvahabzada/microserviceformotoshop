@@ -18,7 +18,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().and().cors().disable()
+        http.cors().and().csrf().disable()
                 .exceptionHandling()
 
                 .authenticationEntryPoint(authEntryPoint)
@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/listbrands").permitAll()
+                .requestMatchers("/listbrands","/saveuser").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

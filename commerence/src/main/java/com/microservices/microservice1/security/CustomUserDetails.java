@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.microservices.microservice1.dtos.RoleDto;
 import com.microservices.microservice1.dtos.UserDto;
-import com.microservices.microservice1.entities.RoleDto;
 
 @Component
 public class CustomUserDetails implements UserDetailsService{

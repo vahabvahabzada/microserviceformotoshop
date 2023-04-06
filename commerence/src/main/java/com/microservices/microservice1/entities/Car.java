@@ -1,9 +1,12 @@
 package com.microservices.microservice1.entities;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -14,7 +17,6 @@ public class Car{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long carId;
-    //private String hostname;
     private String brand;
     private String model;
     private String color;
@@ -25,4 +27,8 @@ public class Car{
     private Boolean barter;
     private String banStyle;
     private Integer kilometers;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    UserEntity host;
 }

@@ -3,6 +3,7 @@ package com.microservices.microservice1.security;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService{
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),mapRolesToAuthorities(user.getRoles()));
     }
 
-    private List<GrantedAuthority> mapRolesToAuthorities(List<Role> roles){
+    private List<GrantedAuthority> mapRolesToAuthorities(Set<Role> roles){
         List<GrantedAuthority> result=new ArrayList<>();
         for(Role role:roles){
             result.add(new SimpleGrantedAuthority(role.getRolename()));

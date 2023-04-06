@@ -25,6 +25,7 @@ public class CustomFilter extends OncePerRequestFilter{
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
                 String token=getJWTFromRequest(request);
+                System.out.println("commerecence-->CustomFilter.java-->Line 28");
                 if(token!=null){
                 Boolean validateToken=restTemplate.postForObject("http://localhost:8080/validatetoken", token, Boolean.class);
                 String inBlackList=restTemplate.postForObject("http://localhost:8080/blacklist",token, String.class);
@@ -41,7 +42,7 @@ public class CustomFilter extends OncePerRequestFilter{
     
     private String getJWTFromRequest(HttpServletRequest request){
         String token=request.getHeader("Authorization");
-        if(token!=null && token.startsWith("Bearer")){
+        if(token!=null && token.startsWith("Bearer ")){
             token=token.substring(7); // "Bearer "
             return token;
         }

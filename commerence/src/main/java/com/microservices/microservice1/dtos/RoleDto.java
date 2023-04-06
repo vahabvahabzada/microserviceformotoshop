@@ -1,4 +1,4 @@
-package com.microservices.microservice1.entities;
+package com.microservices.microservice1.dtos;
 
 import lombok.Data;
 
