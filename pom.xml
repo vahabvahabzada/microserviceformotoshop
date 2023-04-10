@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-dependencies</artifactId>
-			<version>3.0.4</version>
+			<version>3.0.4</version> <!--3.0.4-->
 			<scope>import</scope>
 			<type>pom</type>
 		</dependency>
@@ -56,5 +56,6 @@
   <modules>
   	<module>globalsecurity</module>
 	<module>commerence</module>
+	<module>photohandler</module>
   </modules>
 </project>

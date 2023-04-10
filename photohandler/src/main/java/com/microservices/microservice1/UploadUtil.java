@@ -1,0 +1,30 @@
+package com.microservices.microservice1;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+@Component
+public class UploadUtil {
+    public String uploadPhoto(String fileName,MultipartFile multiPartFile) throws IOException{
+        Path uploadPath=Paths.get("files");
+        if(!Files.exists(uploadPath)){
+            Files.createDirectories(uploadPath);
+        }
+        String fileCode=RandomStringUtils.randomAlphanumeric(8);
+        try(InputStream inputStream=multiPartFile.getInputStream()){
+            Path filPath=uploadPath.resolve(fileCode+"-"+fileName);
+            Files.copy(inputStream, filPath, StandardCopyOption.REPLACE_EXISTING);
+        }catch(IOException excptn){
+            throw new IOException("Could not save file: "+fileName,excptn);
+        }        
+        return fileCode;
+    }
+}

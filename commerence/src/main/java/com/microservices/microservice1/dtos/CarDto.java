@@ -1,5 +1,9 @@
 package com.microservices.microservice1.dtos;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -15,4 +19,6 @@ public class CarDto {
     private Boolean barter;
     private String banStyle;
     private Integer kilometers;
+
+    //private List<MultipartFile> photos;
 }

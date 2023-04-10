@@ -14,9 +14,6 @@ import com.microservices.microservice1.jwt.JWTGenerator;
 
 @Service
 public class LoginService {
-    //@Autowired
-    //UsersRepo repo;
-
     @Autowired
     AuthenticationManager authenticationManager;
 

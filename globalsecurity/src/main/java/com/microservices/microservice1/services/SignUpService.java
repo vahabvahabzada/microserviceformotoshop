@@ -26,20 +26,20 @@ public class SignUpService {
 	private RestTemplate restTemplate;
 
 	public String signUp(UserDto newUser) {
-		User user=new User();
-	user.setUsername(newUser.getUsername());
-	user.setPassword(encoder.encode(newUser.getPassword()));
-		if(repo.findByUsername(user.getUsername())!=null) {
+		User user = new User();
+		user.setUsername(newUser.getUsername());
+		user.setPassword(encoder.encode(newUser.getPassword()));
+		if (repo.findByUsername(user.getUsername()) != null) {
 			return "failure";
 		}
-		Role role=roleRepo.findByRolename("USER");
-		//user.setRoles(Collections.singletonList(role));
+		Role role = roleRepo.findByRolename("USER");
+		// user.setRoles(Collections.singletonList(role));
 		user.setRoles(Collections.singleton(role));
 		repo.save(user);
 
-		System.out.println("SignUpService --> Username is :"+newUser.getUsername());
+		System.out.println("SignUpService --> Username is :" + newUser.getUsername());
 
-		restTemplate.postForObject("http://localhost:8082/saveuser", newUser.getUsername(), Boolean.class);
+		restTemplate.postForObject("http://localhost:8081/saveuser", newUser.getUsername(), Boolean.class);
 		return "success";
 	}
 }

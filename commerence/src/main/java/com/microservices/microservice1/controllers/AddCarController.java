@@ -1,9 +1,14 @@
 package com.microservices.microservice1.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.microservices.microservice1.dtos.CarDto;
 import com.microservices.microservice1.services.AddCarService;
@@ -13,8 +18,9 @@ public class AddCarController {
     @Autowired
     private AddCarService addCarservice;
 
-    @PostMapping("/addnewcar")
-    public Boolean addNewCar( @RequestBody CarDto newCar){
-        return addCarservice.addNewCar(newCar);
+    @PostMapping(value = "/addnewcar",consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public Boolean addNewCar( /*@RequestBody*/@RequestPart("car") CarDto newCar,@RequestPart("file") List<MultipartFile> photos){
+        System.out.println("AddController.java -->Active");
+        return addCarservice.addNewCar(newCar,photos);
     }
 }
