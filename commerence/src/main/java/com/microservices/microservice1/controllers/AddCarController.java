@@ -18,9 +18,10 @@ public class AddCarController {
     @Autowired
     private AddCarService addCarservice;
 
-    @PostMapping(value = "/addnewcar",consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Boolean addNewCar( /*@RequestBody*/@RequestPart("car") CarDto newCar,@RequestPart("file") List<MultipartFile> photos){
+    @PostMapping(value = "/addnewcar", consumes = { MediaType.APPLICATION_JSON_VALUE,
+            MediaType.MULTIPART_FORM_DATA_VALUE })
+    public Boolean addNewCar( /* @RequestBody */@RequestPart("car") CarDto newCar,@RequestPart("file") List<MultipartFile> photos) {
         System.out.println("AddController.java -->Active");
-        return addCarservice.addNewCar(newCar,photos);
+        return addCarservice.addNewCar(newCar, photos);
     }
 }

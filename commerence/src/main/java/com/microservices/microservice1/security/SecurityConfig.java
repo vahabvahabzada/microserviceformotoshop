@@ -1,9 +1,5 @@
 package com.microservices.microservice1.security;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.transform.Source;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,15 +10,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.client.RestTemplate;
-
-
-import org.springframework.http.converter.ByteArrayHttpMessageConverter;
-import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.ResourceHttpMessageConverter;
-import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
-import org.springframework.http.converter.xml.SourceHttpMessageConverter;
-
 
 @Configuration
 @EnableWebSecurity
@@ -64,12 +51,6 @@ public class SecurityConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-        /*final List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        messageConverters.add(new ByteArrayHttpMessageConverter());
-        messageConverters.add(new ResourceHttpMessageConverter());
-        messageConverters.add(new AllEncompassingFormHttpMessageConverter());
-        messageConverters.add(new FormHttpMessageConverter());
-        messageConverters.add(new SourceHttpMessageConverter<Source>());*/
-        return new RestTemplate(/*messageConverters*/);
+        return new RestTemplate();
     }
 }

@@ -19,6 +19,8 @@ public class CarMapper {
         entity.setModel(dto.getModel());
         entity.setPrice(dto.getPrice());
         entity.setYear(dto.getYear());
+        entity.setPhotos(dto.getPhotos());
+        entity.setHost(dto.getHost());
         return entity;
     }
     public CarDto entityToDto(Car entity){
@@ -33,6 +35,8 @@ public class CarMapper {
         dto.setModel(entity.getModel());
         dto.setPrice(entity.getPrice());
         dto.setYear(entity.getYear());
+        dto.setPhotos(entity.getPhotos());
+        dto.setHost(entity.getHost());
         return dto;
     }
 }

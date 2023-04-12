@@ -1,8 +1,9 @@
 package com.microservices.microservice1.dtos;
 
-import java.util.List;
+import java.util.Set;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.microservices.microservice1.entities.Photo;
+import com.microservices.microservice1.entities.UserEntity;
 
 import lombok.Data;
 
@@ -21,4 +22,6 @@ public class CarDto {
     private Integer kilometers;
 
     //private List<MultipartFile> photos;
+    private Set<Photo> photos;
+    private UserEntity host;
 }

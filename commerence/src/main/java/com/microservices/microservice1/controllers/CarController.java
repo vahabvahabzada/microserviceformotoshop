@@ -28,7 +28,7 @@ public class CarController {
     }
 
     @GetMapping("/getcars")
-    public List<CarDto> getCars(@RequestBody GetCars data){//ger bir secime click edednde,uygun olaraq filterleyib neticeleri cixarir ve elecede qiymet ve il araligini teyin edende
+    public List<CarDto> getCars(@RequestBody GetCars data){//bir secime click edednde,uygun olaraq filterleyib neticeleri cixarir ve elecede qiymet ve il araligini teyin edende
         return carService.getCars(data.getCarDto(),data.getPriceMin(),data.getPriceMax(),data.getYearMin(),data.getYearMax());
     }
 }

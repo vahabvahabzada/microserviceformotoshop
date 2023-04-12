@@ -30,6 +30,7 @@ public class CarService {
     public List<CarDto> getCars(CarDto targetCar,Integer priceMin,Integer priceMax,Integer yearMin,Integer yearMax){
         Car target=new Car();
         target=carMapper.dtoToEntity(targetCar);
+        System.out.println("Target Car : "+target);
         //List<Car> results=carRepo.findByBrandAndModelAndColor(target.getBrand(), target.getModel(), target.getColor());
         List<Car> results=carRepo.getCars(target,priceMin,priceMax,yearMin,yearMax);
         List<CarDto> dtoResults=new ArrayList<>();
