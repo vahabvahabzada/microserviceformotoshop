@@ -1,7 +1,9 @@
 package com.microservices.microservice1.entities;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -38,5 +40,5 @@ public class Car{
     private UserEntity host;
 
     @OneToMany(mappedBy = "targetCar",cascade = CascadeType.ALL)
-    private Set<Photo> photos=new HashSet<>();
+    private List<Photo> photos=new ArrayList<>();
 }

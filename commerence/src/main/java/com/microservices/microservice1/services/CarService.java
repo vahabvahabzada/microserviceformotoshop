@@ -10,6 +10,7 @@ import com.microservices.microservice1.dtos.CarDto;
 import com.microservices.microservice1.entities.Car;
 import com.microservices.microservice1.mappers.CarMapper;
 import com.microservices.microservice1.repos.CarRepo;
+import com.microservices.microservice1.repos.PhotoRepo;
 
 @Service
 public class CarService {
@@ -18,6 +19,9 @@ public class CarService {
 
     @Autowired
     private CarMapper carMapper;
+
+    @Autowired
+    private PhotoRepo photoRepo;
 
     public List<String> listBrands(){
         return carRepo.listBrands();
@@ -31,11 +35,16 @@ public class CarService {
         Car target=new Car();
         target=carMapper.dtoToEntity(targetCar);
         System.out.println("Target Car : "+target);
-        //List<Car> results=carRepo.findByBrandAndModelAndColor(target.getBrand(), target.getModel(), target.getColor());
+        
         List<Car> results=carRepo.getCars(target,priceMin,priceMax,yearMin,yearMax);
+        
         List<CarDto> dtoResults=new ArrayList<>();
         for(Car result:results){
-        dtoResults.add(carMapper.entityToDto(result));
+            CarDto carDto;
+            carDto=carMapper.entityToDto(result);
+            carDto.setPhotos(photoRepo.getByCarId(result.getCarId()));
+            System.out.println("Fotolar : "+result.getPhotos());
+            dtoResults.add(carDto);
         }
 
         return dtoResults;

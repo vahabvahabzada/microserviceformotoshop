@@ -1,5 +1,7 @@
 package com.microservices.microservice1.dtos;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.microservices.microservice1.entities.Photo;
@@ -22,6 +24,7 @@ public class CarDto {
     private Integer kilometers;
 
     //private List<MultipartFile> photos;
-    private Set<Photo> photos;
-    private UserEntity host;
+    
+    private List<Photo> photos;
+    //private UserEntity host;
 }
