@@ -16,6 +16,9 @@ public class CarMapper {
     @Autowired
     private PhotoMapper photoMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
     public Car dtoToEntity(CarDto dto){
         Car entity=new Car();
         entity.setBanStyle(dto.getBanStyle());
@@ -54,7 +57,7 @@ public class CarMapper {
 
         dto.setPhotos(photoDto);
 
-        //dto.setHost(photoMapper.entityToDto(entity.getHost()));
+        dto.setHost(userMapper.entityToDto(entity.getHost())); //buradadi problem
 
         return dto;
     }
