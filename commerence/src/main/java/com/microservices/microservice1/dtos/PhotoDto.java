@@ -1,15 +1,13 @@
 package com.microservices.microservice1.dtos;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import lombok.Data;
+//import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 
-//@Data
+// @Data
 public class PhotoDto {
     private Long photoId;
 
@@ -17,6 +15,5 @@ public class PhotoDto {
     private String downloadUrl;
     private long size;
 
-    //@JsonBackReference
-    private CarDto targetCarDto;
+    // private CarDto targetCarDto;
 }

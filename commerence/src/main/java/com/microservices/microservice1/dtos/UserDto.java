@@ -3,9 +3,8 @@ package com.microservices.microservice1.dtos;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import lombok.Data;
+//import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +17,6 @@ public class UserDto {
 
     private List<RoleDto> roles;
 
-    //@JsonManagedReference
-    private List<CarDto> cars=new ArrayList<>();
+
+    //private List<CarDto> cars = new ArrayList<>();
 }

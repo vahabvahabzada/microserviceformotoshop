@@ -1,10 +1,6 @@
 package com.microservices.microservice1.services;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -26,7 +22,6 @@ import com.microservices.microservice1.repos.CarRepo;
 import com.microservices.microservice1.repos.PhotoRepo;
 import com.microservices.microservice1.repos.UserRepo;
 
-
 @Service
 public class AddCarService {
     @Autowired
@@ -44,51 +39,34 @@ public class AddCarService {
     @Autowired
     private PhotoRepo photoRepo;
 
-    public Boolean addNewCar(CarDto newCar,List<MultipartFile> fotolar){
-        System.out.println("Car-->"+newCar.getBrand());
-        System.out.println("fotolar-->"+fotolar.get(0).getOriginalFilename());
+    public Boolean addNewCar(CarDto newCar, List<MultipartFile> fotolar) {
+        System.out.println("Car-->" + newCar.getBrand());
+        System.out.println("fotolar-->" + fotolar.get(0).getOriginalFilename());
 
-        Car car=new Car();
-        car=carMapper.dtoToEntity(newCar);
+        Car car = new Car();
+        car = carMapper.dtoToEntity(newCar);
         car.setHost(userRepo.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
-        car=carRepo.save(car);
+        car = carRepo.save(car);
 
-
-        MultiValueMap<String,Object> bodyMap=new LinkedMultiValueMap<>();
-        //bodyMap.add("file",fotolar.get(0).getResource());
-        for(MultipartFile photoFile:fotolar){
-            bodyMap.add("file",photoFile.getResource());
+        MultiValueMap<String, Object> bodyMap = new LinkedMultiValueMap<>();
+        // bodyMap.add("file",fotolar.get(0).getResource());
+        for (MultipartFile photoFile : fotolar) {
+            bodyMap.add("file", photoFile.getResource());
         }
 
-        ResponseEntity<List<UploadResponse>> responses=restTemplate.exchange("http://localhost:8082/uploadphoto", HttpMethod.POST,new HttpEntity<>(bodyMap/*,headers*/),new ParameterizedTypeReference<List<UploadResponse>>(){});
-        
-        //System.out.println(responses.toString());//yoxlama
+        ResponseEntity<List<UploadResponse>> responses = restTemplate.exchange("http://localhost:8082/uploadphoto",HttpMethod.POST, new HttpEntity<>(bodyMap/* ,headers */),new ParameterizedTypeReference<List<UploadResponse>>() {});
 
+        // System.out.println(responses.toString());//yoxlama
 
-        
-        List<Photo> fotos=new ArrayList<>();
-        for(UploadResponse response:responses.getBody()){
-            Photo foto=new Photo();
+        for (UploadResponse response : responses.getBody()) {
+            Photo foto = new Photo();
             foto.setFileName(response.getFileName());
             foto.setDownloadUrl(response.getDownloadUrl());
             foto.setSize(response.getSize());
 
             foto.setTargetCar(car);
             photoRepo.save(foto);
-            fotos.add(foto);
         }
-
-        //System.out.println("Car id is "+car.getCarId());
-        //Optional<Car> carr;
-        //car= carRepo.findById(car.getCarId()).get();
-        //carr= carRepo.findById(car.getCarId());
-
-        System.out.println("Optional --> "+car.getBrand());
-        //System.out.println(fotos.iterator().next());
-        
-        //car.setPhotos(fotos);
-        //System.out.println("setPhotos() works");
-        //carRepo.save(car);
 
         return true; // yuxaridaki emeliyyatlarda problem olsa kod hec bura cata bilmeyecek,demeli emeliyyat ugurludusa true-du
     }
