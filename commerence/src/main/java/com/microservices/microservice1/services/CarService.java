@@ -31,7 +31,7 @@ public class CarService {
         return carRepo.listModels(brandName);
     }
 
-    public List<CarDto> getCars(CarDto targetCar,Integer priceMin,Integer priceMax,Integer yearMin,Integer yearMax){
+    public List<CarDto>/*List<Car>*/ getCars(CarDto targetCar,Integer priceMin,Integer priceMax,Integer yearMin,Integer yearMax){
         Car target=new Car();
         target=carMapper.dtoToEntity(targetCar);
         System.out.println("Target Car : "+target);
@@ -42,11 +42,13 @@ public class CarService {
         for(Car result:results){
             CarDto carDto;
             carDto=carMapper.entityToDto(result);
-            carDto.setPhotos(photoRepo.getByCarId(result.getCarId()));
-            System.out.println("Fotolar : "+result.getPhotos());
+            
+            ////carDto.setPhotos(photoRepo.getByCarId(result.getCarId()));
+            ////System.out.println("Fotolar : "+result.getPhotos());
+            
             dtoResults.add(carDto);
         }
 
-        return dtoResults;
+        return dtoResults/*results*/;
     }
 }

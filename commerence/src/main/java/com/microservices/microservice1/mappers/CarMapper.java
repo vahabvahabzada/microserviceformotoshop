@@ -1,12 +1,21 @@
 package com.microservices.microservice1.mappers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.microservices.microservice1.dtos.CarDto;
+import com.microservices.microservice1.dtos.PhotoDto;
 import com.microservices.microservice1.entities.Car;
+import com.microservices.microservice1.entities.Photo;
 
 @Component
 public class CarMapper {
+    @Autowired
+    private PhotoMapper photoMapper;
+
     public Car dtoToEntity(CarDto dto){
         Car entity=new Car();
         entity.setBanStyle(dto.getBanStyle());
@@ -38,8 +47,15 @@ public class CarMapper {
         
         System.out.println("CarMapper.java --> "+entity.getPhotos());
         
-        //dto.setPhotos(entity.getPhotos());
-        //dto.setHost(entity.getHost());
+        List<PhotoDto> photoDto=new ArrayList<>();
+        for(Photo photo:entity.getPhotos()){
+            photoDto.add(photoMapper.entityToDto(photo));
+        }
+
+        dto.setPhotos(photoDto);
+
+        //dto.setHost(photoMapper.entityToDto(entity.getHost()));
+
         return dto;
     }
 }

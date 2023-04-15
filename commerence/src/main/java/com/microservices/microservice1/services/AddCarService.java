@@ -62,11 +62,11 @@ public class AddCarService {
 
         ResponseEntity<List<UploadResponse>> responses=restTemplate.exchange("http://localhost:8082/uploadphoto", HttpMethod.POST,new HttpEntity<>(bodyMap/*,headers*/),new ParameterizedTypeReference<List<UploadResponse>>(){});
         
-        System.out.println(responses.toString());//yoxlama
+        //System.out.println(responses.toString());//yoxlama
 
 
         
-        List<Photo> fotos=new ArrayList()<>();
+        List<Photo> fotos=new ArrayList<>();
         for(UploadResponse response:responses.getBody()){
             Photo foto=new Photo();
             foto.setFileName(response.getFileName());
@@ -78,7 +78,7 @@ public class AddCarService {
             fotos.add(foto);
         }
 
-        System.out.println("Car id is "+car.getCarId());
+        //System.out.println("Car id is "+car.getCarId());
         //Optional<Car> carr;
         //car= carRepo.findById(car.getCarId()).get();
         //carr= carRepo.findById(car.getCarId());
