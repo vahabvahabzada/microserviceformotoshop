@@ -69,5 +69,5 @@ public class AddCarService {
         }
 
         return true; // yuxaridaki emeliyyatlarda problem olsa kod hec bura cata bilmeyecek,demeli emeliyyat ugurludusa true-du
-    }
+}
 }

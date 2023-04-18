@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -22,6 +24,9 @@ public class AddCarController {
             MediaType.MULTIPART_FORM_DATA_VALUE })
     public Boolean addNewCar( /* @RequestBody */@RequestPart("car") CarDto newCar,@RequestPart("file") List<MultipartFile> photos) {
         System.out.println("AddController.java -->Active");
-        return addCarservice.addNewCar(newCar, photos);
+        if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("ADMIN")) || SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("SELLER"))){
+            return addCarservice.addNewCar(newCar, photos);
+        }
+        return false;
     }
 }
