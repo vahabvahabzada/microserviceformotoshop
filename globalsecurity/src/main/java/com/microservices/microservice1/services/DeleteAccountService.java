@@ -2,7 +2,7 @@ package com.microservices.microservice1.services;
 
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,16 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class DeleteAccountService {
-    @Autowired
-    private UsersRepo usersRepo;
+    //@Autowired
+    private final UsersRepo usersRepo;
 
-    @Autowired
-    private JWTGenerator jwtGenerator;
+    //@Autowired
+    private final JWTGenerator jwtGenerator;
+
+    public DeleteAccountService(UsersRepo usersRepo,JWTGenerator jwtGenerator){
+        this.usersRepo=usersRepo;
+        this.jwtGenerator=jwtGenerator;
+    }
 
     public void deleteAccount(String token) {
         String username = jwtGenerator.getUsernameFromToken(token);

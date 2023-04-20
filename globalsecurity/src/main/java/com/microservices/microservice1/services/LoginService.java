@@ -1,6 +1,6 @@
 package com.microservices.microservice1.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,11 +14,17 @@ import com.microservices.microservice1.jwt.JWTGenerator;
 
 @Service
 public class LoginService {
-    @Autowired
-    AuthenticationManager authenticationManager;
+    //@Autowired
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    JWTGenerator jwtGenerator;
+    //@Autowired
+    private final JWTGenerator jwtGenerator;
+    
+    public LoginService(AuthenticationManager authenticationManager,JWTGenerator jwtGenerator){
+        this.authenticationManager=authenticationManager;
+        this.jwtGenerator=jwtGenerator;
+    }
+
     public String login(UserDto user){
         Authentication authentication=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         System.out.println(authentication);

@@ -1,6 +1,6 @@
 package com.microservices.microservice1.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +11,20 @@ import com.microservices.microservice1.repos.UsersRepo;
 
 @Service
 public class LogoutService {
-    @Autowired
-    private JWTGenerator jwtGenerator;
+    //@Autowired
+    private final JWTGenerator jwtGenerator;
 
-    @Autowired
-    private BlackListRepo repo;
+    //@Autowired
+    private final BlackListRepo repo;
 
-    @Autowired
-    private UsersRepo usersRepo;
+    //@Autowired
+    private final UsersRepo usersRepo;
+
+    public LogoutService(JWTGenerator jwtGenerator,BlackListRepo repo,UsersRepo usersRepo){
+        this.jwtGenerator=jwtGenerator;
+        this.repo=repo;
+        this.usersRepo=usersRepo;
+    }
 
     public void logout(String token) {
         System.out.println("Inside logout method");

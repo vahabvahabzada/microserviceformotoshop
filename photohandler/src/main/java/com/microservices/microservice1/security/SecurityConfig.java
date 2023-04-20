@@ -18,6 +18,7 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source=new UrlBasedCorsConfigurationSource();
         CorsConfiguration config=new CorsConfiguration();
         config.addAllowedOrigin("http://localhost:8081");
+        config.addAllowedOrigin("http://localhost:5500");//allow ui to get files by using /downloadFileUrl
         config.addAllowedHeader("*");
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("HEAD");

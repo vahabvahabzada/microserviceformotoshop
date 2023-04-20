@@ -1,7 +1,7 @@
 package com.microservices.microservice1.services;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -24,20 +24,29 @@ import com.microservices.microservice1.repos.UserRepo;
 
 @Service
 public class AddCarService {
-    @Autowired
-    private CarRepo carRepo;
+    //@Autowired
+    private final CarRepo carRepo;
 
-    @Autowired
-    private CarMapper carMapper;
+    //@Autowired
+    private final CarMapper carMapper;
 
-    @Autowired
-    private UserRepo userRepo;
+    //@Autowired
+    private final UserRepo userRepo;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    //@Autowired
+    private final RestTemplate restTemplate;
 
-    @Autowired
-    private PhotoRepo photoRepo;
+    //@Autowired
+    private final PhotoRepo photoRepo;
+
+    //@Autowired
+    public AddCarService(CarRepo carRepo,CarMapper carMapper,UserRepo userRepo,RestTemplate restTemplate,PhotoRepo photoRepo){
+        this.carRepo=carRepo;
+        this.carMapper=carMapper;
+        this.restTemplate=restTemplate;
+        this.photoRepo=photoRepo;
+        this.userRepo=userRepo;
+    }
 
     public Boolean addNewCar(CarDto newCar, List<MultipartFile> fotolar) {
         System.out.println("Car-->" + newCar.getBrand());

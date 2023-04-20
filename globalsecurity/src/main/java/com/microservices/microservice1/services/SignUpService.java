@@ -2,7 +2,7 @@ package com.microservices.microservice1.services;
 
 import java.util.Collections;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,15 +16,22 @@ import com.microservices.microservice1.repos.UsersRepo;
 
 @Service
 public class SignUpService {
-	@Autowired
-	private UsersRepo repo;
-	@Autowired
-	private RoleRepo roleRepo;
-	@Autowired
-	private PasswordEncoder encoder;
+	//@Autowired
+	private final UsersRepo repo;
+	//@Autowired
+	private final RoleRepo roleRepo;
+	//@Autowired
+	private final PasswordEncoder encoder;
 
-	@Autowired
-	private RestTemplate restTemplate;
+	//@Autowired
+	private final RestTemplate restTemplate;
+
+	public SignUpService(UsersRepo repo,RoleRepo roleRepo,PasswordEncoder encoder,RestTemplate restTemplate){
+		this.repo=repo;
+		this.roleRepo=roleRepo;
+		this.encoder=encoder;
+		this.restTemplate=restTemplate;
+	}
 
 	public String signUp(UserDto newUser) {
 		User user = new User();

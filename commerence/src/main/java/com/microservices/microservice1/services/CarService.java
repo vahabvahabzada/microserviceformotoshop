@@ -3,7 +3,7 @@ package com.microservices.microservice1.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.microservices.microservice1.dtos.CarDto;
@@ -13,11 +13,16 @@ import com.microservices.microservice1.repos.CarRepo;
 
 @Service
 public class CarService {
-    @Autowired
-    private CarRepo carRepo;
+    //@Autowired
+    private final CarRepo carRepo;
 
-    @Autowired
-    private CarMapper carMapper;
+    //@Autowired
+    private final CarMapper carMapper;
+
+    public CarService(CarRepo carRepo,CarMapper carMapper){
+        this.carRepo=carRepo;
+        this.carMapper=carMapper;
+    }
 
     public List<String> listBrands() {
         return carRepo.listBrands();
