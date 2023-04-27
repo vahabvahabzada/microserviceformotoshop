@@ -11,7 +11,7 @@ import com.microservices.microservice1.services.LoginService;
 @RestController
 public class LoginController {
     @Autowired
-    LoginService service;
+    private LoginService service;
 
     @PostMapping("/login")
     public String login(@RequestBody UserDto user){
