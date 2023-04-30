@@ -21,8 +21,7 @@ public class OperationsService {
         return operations.listModels(brandName);
     }
 
-    public List<CarDto> getCars(CarDto targetCar, Integer priceMin, Integer priceMax, Integer yearMin,
-            Integer yearMax) {
+    public List<CarDto> getCars(CarDto targetCar, Integer priceMin, Integer priceMax, Integer yearMin,Integer yearMax) {
         return operations.getCars(targetCar, priceMin, priceMax, yearMin, yearMax);
     }
 

@@ -3,10 +3,13 @@ package com.microservices.microservice1.repos;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.microservices.microservice1.entities.Car;
+
+import jakarta.transaction.Transactional;
 
 public interface CarRepo extends JpaRepository<Car, Long> {
 
@@ -37,4 +40,12 @@ public interface CarRepo extends JpaRepository<Car, Long> {
             "(select item from Car item where item.barter=:#{#car.barter} or not exists(select item from Car item where :#{#car.barter} is not null))")
     public List<Car> getCars(@Param("car") Car target, @Param("pricemin") Integer priceMin, @Param("pricemax") Integer priceMax, @Param("yearmin") Integer yearMin, @Param("yearmax") Integer yearMax);
 
+
+    @Query(value = "select * from cars where user_id=?1",nativeQuery = true)
+    public List<Car> getCarsByUserId(Long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "delete from cars where user_id=?1",nativeQuery = true)
+    public Integer deleteByUserId(Long userId);
 }

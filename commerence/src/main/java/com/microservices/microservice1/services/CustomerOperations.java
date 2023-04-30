@@ -28,8 +28,7 @@ public class CustomerOperations implements Operations {
     }
 
     @Override
-    public List<CarDto> getCars(CarDto targetCar, Integer priceMin, Integer priceMax, Integer yearMin,
-            Integer yearMax) {
+    public List<CarDto> getCars(CarDto targetCar, Integer priceMin, Integer priceMax, Integer yearMin,Integer yearMax) {
         Car target = new Car();
         target = carMapper.dtoToEntity(targetCar);
         System.out.println("Target Car : " + target);

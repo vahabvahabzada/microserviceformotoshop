@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/listbrands", "/saveuser").permitAll()
+                .requestMatchers("/listbrands", "/saveuser","/deleteaccounturl").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
