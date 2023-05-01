@@ -19,7 +19,7 @@ import com.microservices.microservice1.dtos.UserDto;
 @Component
 public class CustomUserDetails implements UserDetailsService{
     @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate=null;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

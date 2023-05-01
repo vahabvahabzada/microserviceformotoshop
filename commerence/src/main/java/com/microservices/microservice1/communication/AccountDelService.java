@@ -13,13 +13,13 @@ import com.microservices.microservice1.repos.UserRepo;
 @Service
 public class AccountDelService {
     @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo=null;
 
     @Autowired
-    private PhotoRepo photoRepo;
+    private final PhotoRepo photoRepo=null;
 
     @Autowired
-    private CarRepo carRepo;
+    private final CarRepo carRepo=null;
 
     public int deleteAccount(String username){
         Long targetId=userRepo.findByUsername(username).getUserId();

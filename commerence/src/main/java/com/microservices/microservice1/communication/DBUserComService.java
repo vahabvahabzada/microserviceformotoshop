@@ -9,7 +9,7 @@ import com.microservices.microservice1.repos.UserRepo;
 @Service
 public class DBUserComService {
     @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo=null;
     public Boolean saveUserToDB(String newUser){
         UserEntity user=new UserEntity();
         //user.setName(newUser);

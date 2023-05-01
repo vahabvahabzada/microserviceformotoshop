@@ -10,7 +10,7 @@ import com.microservices.microservice1.repos.UsersRepo;
 @Service
 public class UserCommunicationService {
     @Autowired
-    private UsersRepo repo;
+    private final UsersRepo repo=null;
 
     public UserDto findByUserName(String name) {
         User user = repo.findByUsername(name);

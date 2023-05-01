@@ -20,7 +20,7 @@ import com.microservices.microservice1.repos.UsersRepo;
 @Service
 public class CustomUserDetailsService implements UserDetailsService{
     @Autowired
-    private UsersRepo repoLogin;
+    private final UsersRepo repoLogin=null;
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
