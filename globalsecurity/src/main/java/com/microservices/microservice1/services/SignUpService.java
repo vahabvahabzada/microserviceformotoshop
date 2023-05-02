@@ -16,14 +16,12 @@ import com.microservices.microservice1.repos.UsersRepo;
 
 @Service
 public class SignUpService {
-	//@Autowired
 	private final UsersRepo repo;
-	//@Autowired
+	
 	private final RoleRepo roleRepo;
-	//@Autowired
+	
 	private final PasswordEncoder encoder;
 
-	//@Autowired
 	private final RestTemplate restTemplate;
 
 	public SignUpService(UsersRepo repo,RoleRepo roleRepo,PasswordEncoder encoder,RestTemplate restTemplate){

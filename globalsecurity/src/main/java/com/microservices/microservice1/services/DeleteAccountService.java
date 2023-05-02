@@ -15,10 +15,8 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class DeleteAccountService {
-    //@Autowired
     private final UsersRepo usersRepo;
 
-    //@Autowired
     private final JWTGenerator jwtGenerator;
 
     public DeleteAccountService(UsersRepo usersRepo,JWTGenerator jwtGenerator){

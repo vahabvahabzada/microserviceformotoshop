@@ -27,8 +27,7 @@ public class AdminOperations extends CustomerOperations {
     private final CarRepo carRepo;
     private final RestTemplate restTemplate;
 
-    public AdminOperations(CarRepo carRepo, CarMapper carMapper, UserRepo userRepo, PhotoRepo photoRepo,
-            RestTemplate restTemplate) {
+    public AdminOperations(CarRepo carRepo, CarMapper carMapper, UserRepo userRepo, PhotoRepo photoRepo,RestTemplate restTemplate) {
         super(carRepo, carMapper);
         this.userRepo = userRepo;
         this.photoRepo = photoRepo;

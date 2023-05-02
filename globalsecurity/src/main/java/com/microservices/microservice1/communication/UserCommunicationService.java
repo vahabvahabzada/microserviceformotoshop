@@ -1,6 +1,5 @@
 package com.microservices.microservice1.communication;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.microservices.microservice1.dtos.UserDto;
@@ -9,8 +8,10 @@ import com.microservices.microservice1.repos.UsersRepo;
 
 @Service
 public class UserCommunicationService {
-    @Autowired
-    private final UsersRepo repo=null;
+    private final UsersRepo repo;
+    public UserCommunicationService(UsersRepo usersRepo){
+        this.repo=usersRepo;
+    }
 
     public UserDto findByUserName(String name) {
         User user = repo.findByUsername(name);

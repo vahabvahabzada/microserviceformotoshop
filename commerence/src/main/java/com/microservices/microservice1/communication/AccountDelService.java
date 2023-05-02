@@ -2,7 +2,6 @@ package com.microservices.microservice1.communication;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.microservices.microservice1.entities.Car;
@@ -12,14 +11,17 @@ import com.microservices.microservice1.repos.UserRepo;
 
 @Service
 public class AccountDelService {
-    @Autowired
-    private final UserRepo userRepo=null;
+    private final UserRepo userRepo;
 
-    @Autowired
-    private final PhotoRepo photoRepo=null;
+    private final PhotoRepo photoRepo;
 
-    @Autowired
-    private final CarRepo carRepo=null;
+    private final CarRepo carRepo;
+
+    public AccountDelService(UserRepo userRepo,PhotoRepo photoRepo,CarRepo carRepo){
+        this.userRepo=userRepo;
+        this.photoRepo=photoRepo;
+        this.carRepo=carRepo;
+    }
 
     public int deleteAccount(String username){
         Long targetId=userRepo.findByUsername(username).getUserId();

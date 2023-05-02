@@ -1,6 +1,5 @@
 package com.microservices.microservice1.services;
 
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,6 @@ import com.microservices.microservice1.jwt.JWTGenerator;
 
 @Service
 public class TokenUpdateService {
-    //@Autowired
     private final JWTGenerator jwtGenerator;
 
     public TokenUpdateService(JWTGenerator jwtGenerator){

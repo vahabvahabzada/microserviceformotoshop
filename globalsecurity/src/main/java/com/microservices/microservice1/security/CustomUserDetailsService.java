@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,8 +18,10 @@ import com.microservices.microservice1.repos.UsersRepo;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService{
-    @Autowired
-    private final UsersRepo repoLogin=null;
+    private final UsersRepo repoLogin;
+    public CustomUserDetailsService(UsersRepo usersRepo){
+        this.repoLogin=usersRepo;
+    }
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
