@@ -3,7 +3,6 @@ package com.microservices.microservice1.mappers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.microservices.microservice1.dtos.CarDto;
@@ -13,11 +12,13 @@ import com.microservices.microservice1.entities.Photo;
 
 @Component
 public class CarMapper {
-    @Autowired
-    private PhotoMapper photoMapper;
 
-    @Autowired
-    private UserMapper userMapper;
+    private final PhotoMapper photoMapper;
+    private final UserMapper userMapper;
+    public CarMapper(PhotoMapper photoMapper,UserMapper userMapper){
+        this.photoMapper=photoMapper;
+        this.userMapper=userMapper;
+    }
 
     public Car dtoToEntity(CarDto dto){
         Car entity=new Car();

@@ -1,7 +1,6 @@
 package com.microservices.microservice1.security;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,8 +13,15 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Autowired
     private AuthEntryPoint authEntryPoint;
+
+    private CustomUserDetails customUserDetails;
+    private final RestTemplate restTemplate;
+    public SecurityConfig(AuthEntryPoint authEntryPoint,CustomUserDetails customUserDetails,RestTemplate restTemplate){
+        this.authEntryPoint=authEntryPoint;
+        this.customUserDetails=customUserDetails;
+        this.restTemplate=restTemplate;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -46,7 +52,7 @@ public class SecurityConfig {
 
     @Bean
     public CustomFilter customFilter() {
-        return new CustomFilter();
+        return new CustomFilter(restTemplate, customUserDetails);
     }
 
     @Bean

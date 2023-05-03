@@ -3,7 +3,6 @@ package com.microservices.microservice1.security;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,8 +17,11 @@ import com.microservices.microservice1.dtos.UserDto;
 
 @Component
 public class CustomUserDetails implements UserDetailsService{
-    @Autowired
-    private final RestTemplate restTemplate=null;
+
+    private final RestTemplate restTemplate;
+    public CustomUserDetails(RestTemplate restTemplate){
+        this.restTemplate=restTemplate;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

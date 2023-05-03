@@ -2,7 +2,6 @@ package com.microservices.microservice1.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,23 +27,22 @@ import com.microservices.microservice1.services.SellerOperations;
 @RestController
 public class OperationsController {
 
-    //@Autowired
     private OperationsService operationsService; 
+    private final CarRepo carRepo;
+    private final CarMapper carMapper;
+    private final UserRepo userRepo;
+    private final PhotoRepo photoRepo;
 
-    @Autowired
-    private CarRepo carRepo;
+    private final RestTemplate restTemplate;
 
-    @Autowired
-    private CarMapper carMapper;
-
-    @Autowired
-    private UserRepo userRepo;
-
-    @Autowired
-    private PhotoRepo photoRepo;
-
-    @Autowired
-    private RestTemplate restTemplate;
+    public OperationsController(OperationsService operationsService,CarRepo carRepo,CarMapper carMapper,UserRepo userRepo,PhotoRepo photoRepo,RestTemplate restTemplate){
+        this.operationsService=operationsService;
+        this.carRepo=carRepo;
+        this.carMapper=carMapper;
+        this.userRepo=userRepo;
+        this.photoRepo=photoRepo;
+        this.restTemplate=restTemplate;
+    }
 
     @GetMapping("/listbrands")
     public List<String> listBrands() {

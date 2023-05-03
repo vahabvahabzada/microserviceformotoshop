@@ -2,7 +2,6 @@ package com.microservices.microservice1.security;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,11 +14,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class CustomFilter extends OncePerRequestFilter{
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
+    private final RestTemplate restTemplate;
     private CustomUserDetails customDetails;
+    public CustomFilter(RestTemplate restTemplate,CustomUserDetails customUserDetails){
+        this.restTemplate=restTemplate;
+        this.customDetails=customUserDetails;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
