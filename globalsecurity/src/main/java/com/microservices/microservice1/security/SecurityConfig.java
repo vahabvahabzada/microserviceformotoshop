@@ -1,7 +1,6 @@
 package com.microservices.microservice1.security;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,14 +14,26 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.client.RestTemplate;
 
+import com.microservices.microservice1.jwt.JWTGenerator;
 import com.microservices.microservice1.jwt.JwtAuthEntryPoint;
 import com.microservices.microservice1.jwt.JwtFilter;
+import com.microservices.microservice1.repos.BlackListRepo;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Autowired
     private JwtAuthEntryPoint jwtAuthEntryPoint;
+
+    private JWTGenerator jwtGenerator;
+    private CustomUserDetailsService userDetailsService;
+    private final BlackListRepo blackListRepo;
+
+    public SecurityConfig(JwtAuthEntryPoint jwtAuthEntryPoint,JWTGenerator jwtGenerator,CustomUserDetailsService userDetailsService,BlackListRepo blackListRepo){
+        this.jwtAuthEntryPoint=jwtAuthEntryPoint;
+        this.jwtGenerator=jwtGenerator;
+        this.userDetailsService=userDetailsService;
+        this.blackListRepo=blackListRepo;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -68,7 +79,7 @@ public class SecurityConfig {
 
     @Bean
     public JwtFilter jwtFilter(){
-        return new JwtFilter();
+        return new JwtFilter(jwtGenerator, userDetailsService, blackListRepo);
     }
 
     @Bean

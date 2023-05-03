@@ -17,3 +17,7 @@ public class DBUserComController {
         return true;
     }
 }
+
+
+// git congig -l
+// git remote add origin TARGETURL

@@ -1,6 +1,5 @@
 package com.microservices.microservice1.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,8 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class LogoutController {
-    @Autowired
     private LogoutService service;
+    public LogoutController(LogoutService service){
+        this.service=service;
+    }
 
     @GetMapping("/logouturl") //default olaraq /logout url -i movcuddur deye, /logouturl yaziriq
     public void logout(HttpServletRequest request){

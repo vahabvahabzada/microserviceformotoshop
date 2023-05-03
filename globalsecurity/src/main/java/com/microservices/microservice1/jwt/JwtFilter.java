@@ -2,7 +2,6 @@ package com.microservices.microservice1.jwt;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,14 +17,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class JwtFilter extends OncePerRequestFilter {
-    @Autowired
     private JWTGenerator jwtGenerator;
-
-    @Autowired
     private CustomUserDetailsService userDetailsService;
-
-    @Autowired
-    private BlackListRepo blackListRepo;
+    private final BlackListRepo blackListRepo;
+    public JwtFilter(JWTGenerator jwtGenerator,CustomUserDetailsService userDetailsService,BlackListRepo blackListRepo){
+        this.jwtGenerator=jwtGenerator;
+        this.userDetailsService=userDetailsService;
+        this.blackListRepo=blackListRepo;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
