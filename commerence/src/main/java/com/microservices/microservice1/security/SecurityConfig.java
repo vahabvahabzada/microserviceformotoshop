@@ -55,8 +55,8 @@ public class SecurityConfig {
         return new CustomFilter(restTemplate, customUserDetails);
     }
 
-    @Bean
+    /*@Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
-    }
+    }*/
 }

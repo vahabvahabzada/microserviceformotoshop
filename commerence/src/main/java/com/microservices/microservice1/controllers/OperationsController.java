@@ -35,8 +35,7 @@ public class OperationsController {
 
     private final RestTemplate restTemplate;
 
-    public OperationsController(OperationsService operationsService,CarRepo carRepo,CarMapper carMapper,UserRepo userRepo,PhotoRepo photoRepo,RestTemplate restTemplate){
-        this.operationsService=operationsService;
+    public OperationsController(CarRepo carRepo,CarMapper carMapper,UserRepo userRepo,PhotoRepo photoRepo,RestTemplate restTemplate){
         this.carRepo=carRepo;
         this.carMapper=carMapper;
         this.userRepo=userRepo;
