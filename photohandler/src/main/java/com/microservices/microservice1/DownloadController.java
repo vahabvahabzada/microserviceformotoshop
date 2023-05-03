@@ -2,7 +2,6 @@ package com.microservices.microservice1;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DownloadController {
-    @Autowired
     private DownloadUtil downloadUtil;
+    public DownloadController(DownloadUtil downloadUtil){
+        this.downloadUtil=downloadUtil;
+    }
+
     @GetMapping("/downloadFile")
     public ResponseEntity<?> getPhoto(@RequestBody String fileCode) throws IOException{
         Resource resource=null;
